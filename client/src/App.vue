@@ -103,7 +103,7 @@ export default {
   name: "app",
   data() {
     return {
-      appName: `Magic ${process.env.VUE_APP_NAME}`,
+      appName: `C19T URL Shortener`,
       signUpUrl: `${authDomain}/signup?response_type=code&client_id=${clientId}&redirect_uri=${redUrl}`,
       logInUrl: `${authDomain}/login?response_type=code&client_id=${clientId}&redirect_uri=${redUrl}`,
       logOutUrl: `${authDomain}/logout?client_id=${clientId}&logout_uri=${redUrl}`,
@@ -116,7 +116,7 @@ export default {
     else this.exchangeRefreshToken();
   },
   methods: {
-    convertJSON: function (json) {
+    convertJSON: function(json) {
       const oAuthTokenBodyArray = Object.entries(json).map(([key, value]) => {
         const encodedKey = encodeURIComponent(key);
         const encodedValue = encodeURIComponent(value);
@@ -124,7 +124,7 @@ export default {
       });
       return oAuthTokenBodyArray.join("&");
     },
-    exchangeRefreshToken: function () {
+    exchangeRefreshToken: function() {
       const oauthTokenBodyJson = {
         grant_type: "refresh_token",
         client_id: clientId,
@@ -153,7 +153,7 @@ export default {
         });
       }
     },
-    exchangeToken: function () {
+    exchangeToken: function() {
       const oauthTokenBodyJson = {
         grant_type: "authorization_code",
         client_id: clientId,
@@ -181,7 +181,7 @@ export default {
           this.$store.commit("deAuthorize");
         });
     },
-    logout: function () {
+    logout: function() {
       localStorage.setItem("cognitoIdentityToken", null);
       localStorage.setItem("cognitoRefreshToken", null);
     },

@@ -88,7 +88,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
         <header class="modal-card-head">
           <p class="modal-card-title">
             <span v-if="modalTypeCreate">Create</span>
-            <span v-else>Update</span> Sliplink
+            <span v-else>Update</span> Link
           </p>
           <button
             class="delete"
@@ -169,7 +169,7 @@ export default {
     ...mapState(["links"]),
   },
   methods: {
-    toggleModal: function (type, link = null, ind = 0) {
+    toggleModal: function(type, link = null, ind = 0) {
       this.model.id = this.model.url = ""; // hacky reset
       this.modalTypeCreate = type === "create";
       this.modalIsActive = !this.modalIsActive;
@@ -181,7 +181,7 @@ export default {
         this.model.url = link.url;
       }
     },
-    fetchData: function () {
+    fetchData: function() {
       axios
         .get(`${this.apiUrl}/app`, {
           headers: {
@@ -191,7 +191,7 @@ export default {
         .then((response) => this.$store.commit("hydrateLinks", response.data))
         .catch(() => this.$store.commit("drainLinks"));
     },
-    createLink: function () {
+    createLink: function() {
       let that = this;
       axios
         .post(`${that.apiUrl}/app`, that.model, {
@@ -210,10 +210,10 @@ export default {
         .catch((err) => {
           // eslint-disable-next-line
           console.log(`POST to ${that.apiUrl}/app caught error ${err}`);
-          alert("SlipLink cannot be created. Bad format.");
+          alert("Link cannot be created. Bad format.");
         });
     },
-    updateLink: function () {
+    updateLink: function() {
       let that = this;
       that.currentLink.url = that.model.url;
       axios
@@ -227,14 +227,14 @@ export default {
             that.toggleModal();
             that.$store.commit("updateLink", response.data, that.currentIndex);
           } else {
-            alert("There was an issue deleting your SlipLink");
+            alert("There was an issue deleting your Link");
           }
         })
         .catch(() => {
-          alert("There was an issue deleting your SlipLink");
+          alert("There was an issue deleting your Link");
         });
     },
-    deleteLink: function (id, ind) {
+    deleteLink: function(id, ind) {
       if (confirm(`Are you sure you want to delete '${id}'`)) {
         let that = this;
         axios
@@ -249,7 +249,7 @@ export default {
             if (response.status === 200) {
               that.$store.commit("removeLink", ind);
             } else {
-              alert("There was an issue deleting your SlipLink");
+              alert("There was an issue deleting your Link");
             }
           })
           .catch((err) => {
