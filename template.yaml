@@ -195,7 +195,7 @@ Resources:
   AmplifyApp:
     Type: AWS::Amplify::App
     Properties:
-      Name: Url-Shortener-Client
+      Name: !Sub ${AppName}
       Description: Basic client for URL Shortner
       Repository: !Ref GithubRepository
       AccessToken: !Ref PersonalAcessToken
@@ -336,7 +336,7 @@ Resources:
   APIGateway4xxAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "URL Shortener API 4xx Alarm"
+      AlarmName: !Sub ${AppName} API 4xx Alarm
       AlarmDescription: "4xx monitor"
       MetricName: "4XXError"
       Namespace: "AWS/ApiGateway"
@@ -354,7 +354,7 @@ Resources:
   APIGateway5xxAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "URL Shortener API 5xx Alarm"
+      AlarmName: !Sub ${AppName} API 5xx Alarm
       AlarmDescription: "5xx monitor"
       MetricName: "5XXError"
       Namespace: "AWS/ApiGateway"
@@ -372,13 +372,13 @@ Resources:
   APIGatewayLatencyAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "URL Shortener API Latency Alarm"
+      AlarmName: !Sub ${AppName} API Latency Alarm
       AlarmDescription: "Latency monitor"
       MetricName: "Latency"
       Namespace: "AWS/ApiGateway"
       Dimensions:
         - Name: "ApiName"
-          Value: "URL Shortener API"
+          Value: !Sub ${AppName} Shortener API
       ExtendedStatistic: "p99"
       Period: 300
       EvaluationPeriods: 1
@@ -390,7 +390,7 @@ Resources:
   DDB5xxAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "URL Shortener DDB 5xx Alarm"
+      AlarmName: !Sub ${AppName} DDB 5xx Alarm
       AlarmDescription: "System monitor"
       MetricName: "SystemErrors"
       Namespace: "AWS/DynamoDB"
@@ -408,7 +408,7 @@ Resources:
   DDB4xxAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "URL Shortener DDB 4xx Alarm"
+      AlarmName: !Sub ${AppName} DDB 4xx Alarm
       AlarmDescription: "User monitor"
       MetricName: "UserErrors"
       Namespace: "AWS/DynamoDB"
@@ -426,7 +426,7 @@ Resources:
   CloudFrontTotalErrorRateAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "Url Shortener CloudFront Errors"
+      AlarmName: !Sub ${AppName} CloudFront Errors
       AlarmDescription: "CDN error monitor"
       MetricName: TotalErrorRate
       Namespace: AWS/CloudFront
@@ -444,7 +444,7 @@ Resources:
   CloudFrontTotalCacheHitRateAlarm:
     Type: AWS::CloudWatch::Alarm
     Properties:
-      AlarmName: "Url Shortener CloudFront Cache Hit Rate"
+      AlarmName: !Sub ${AppName} CloudFront Cache Hit Rate
       AlarmDescription: "CDN eache monitor"
       MetricName: CacheHitRate
       Namespace: AWS/CloudFront
